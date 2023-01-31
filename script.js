@@ -12,17 +12,18 @@ function createGridBlock(gridDivison) {
   const gridBlock = document.createElement("div");
   const gridStyle = `height: ${LENGTH / gridDivison}px; width: ${
     LENGTH / gridDivison
-  }px; background-color:black;`;
+  }px;`;
   gridBlock.style.cssText = gridStyle;
-  gridBlock.classList.toggle(".gridBlock");
+  gridBlock.classList.toggle("gridBlock");
+  gridBlock.classList.toggle("grid-block-active");
   GRID.appendChild(gridBlock);
 }
-//taking too long bc didnt include units px after number and it was remove instead of removeChild
-// when i reload page it just stops now its better wtf
+// If you input an invalid command the browser just goes crazy trying to look for it
 function createGrid(gridDivision) {
   clearGrid();
   for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
     createGridBlock(gridDivision);
   }
 }
-createGrid(64);
+createGrid(20);
+console.log(GRID.childNodes.length);

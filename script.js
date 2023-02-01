@@ -14,7 +14,6 @@ function createGridBlock(gridDivison) {
     LENGTH / gridDivison
   }px;`;
   gridBlock.style.cssText = gridStyle;
-  gridBlock.classList.toggle("gridBlock");
   gridBlock.classList.toggle("grid-block-active");
   GRID.appendChild(gridBlock);
 }
@@ -24,6 +23,18 @@ function createGrid(gridDivision) {
   for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
     createGridBlock(gridDivision);
   }
+  paintGrid();
 }
-createGrid(20);
-console.log(GRID.childNodes.length);
+createGrid(32);
+
+function paintGrid() {
+  const gridBlocks = document.querySelectorAll(".grid-block-active");
+  gridBlocks.forEach((block) => {
+    block.addEventListener("mousedown", () => {
+      block.classList.toggle("grid-block-active");
+      block.classList.toggle("grid-block-painted");
+    });
+  });
+}
+
+// function isPainted() {}

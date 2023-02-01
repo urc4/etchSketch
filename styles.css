@@ -30,10 +30,10 @@ body {
     background-color: var(--primary-white);
 }
 
-.gridBlock{
-    border: 1px solid black;
-}
-
 .grid-block-active:hover{
     background-color: var(--primary-grey-hover);
+}
+
+.grid-block-painted{
+    background-color: var(--text-color);
 }

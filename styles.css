@@ -5,7 +5,8 @@
     --secondary-grey-hover: #525252;
     --text-color: #070606;
     --grid-block-color: #f2f2f2;
-    --button-color-bground: red;
+    --primary-btn-bg-color: red;
+    --secondary-btn-bg-color: lightcoral;
 }
 *,
 *::before,
@@ -42,14 +43,15 @@ button {
 .btn-circle {
     width: 160px;
     height: 160px;
+    /* maybe add transition when clicked */
 }
 
 .color-btn {
-    background-color: var(--button-color-bground);
+    background-color: var(--primary-btn-bg-color);
 }
 
-.btn:hover{
-    background-color: var(--primary-grey-hover);
+.color-btn:hover{
+    background-color: var(--secondary-btn-bg-color);
 }
 
 .btn:active{

@@ -9,6 +9,15 @@ const COLOR_PALETTE = [
   "indigo",
   "violet",
 ];
+const SECONDARY_COLOR_PALETTE = [
+  "lightcoral",
+  "lightyellow",
+  "lightsalmon",
+  "lightseagreen",
+  "lightblue",
+  "lightskyblue",
+  "lightpink",
+];
 
 function eraseGrid() {
   while (GRID.firstChild) {
@@ -53,21 +62,24 @@ function getColor() {
   return colorButton.id;
 }
 
-function getNextColor() {
+function showNextColor() {
   const colorButton = document.querySelector(".color-btn");
   const colorID = colorButton.id;
   const paletteLength = COLOR_PALETTE.length;
   const idIndex = COLOR_PALETTE.indexOf(colorID);
+  colorButton.removeAttribute("id");
   let nextColor;
-  idIndex === paletteLength
-    ? (nextColor = COLOR_PALETTE[0])
-    : (nextColor = COLOR_PALETTE[idIndex + 1]);
 
-  colorButton.style.setProperty("--btn-color-bground", COLOR_PALETTE[0]);
-  console.log(COLOR_PALETTE[idIndex + 1]);
-  return nextColor;
-
-  //add eventlistners to buttons later on
+  if (idIndex === paletteLength - 1) {
+    nextColor = COLOR_PALETTE[0];
+    nextSecondaryColor = SECONDARY_COLOR_PALETTE[0];
+  } else {
+    nextColor = COLOR_PALETTE[idIndex + 1];
+    nextSecondaryColor = SECONDARY_COLOR_PALETTE[idIndex + 1];
+  }
+  colorButton.id = nextColor;
+  colorButton.style.setProperty("--primary-btn-bg-color", nextColor);
+  colorButton.style.setProperty("--secondary-btn-bg-color", nextSecondaryColor);
 }
 
 function isPainted(gridBlock) {
@@ -79,6 +91,7 @@ function isPainted(gridBlock) {
 function paintBlock(block) {
   //could a paint white option to be the eraser
   const color = getColor();
+
   block.style.setProperty("--grid-block-color", color);
 
   if (isPainted(block)) return;
@@ -91,6 +104,10 @@ function paintBlock(block) {
 
 function paintGrid() {
   const gridBlocks = document.querySelectorAll(".grid-block");
+  const colorButton = document.querySelector(".color-btn");
+  colorButton.addEventListener("click", () => {
+    showNextColor();
+  });
   gridBlocks.forEach((block) => {
     block.addEventListener("mousedown", () => paintBlock(block));
     //add mouse down and mouse over and click functionalities to paint individually and drag

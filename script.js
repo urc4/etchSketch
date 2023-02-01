@@ -35,9 +35,6 @@ function createGrid(gridDivision) {
   }
   paintGrid();
 }
-createGrid(30);
-//if you leave a function with an empty statement it just does not stop runnnig
-// or should it return undefined??
 
 function getColor() {
   //has to be a string
@@ -52,7 +49,14 @@ function isPainted(gridBlock) {
   return false;
 }
 
+function clearBlock(block) {
+  if (!isPainted(block)) return;
+  block.classList.toggle("active");
+  block.classList.toggle("inactive");
+}
+
 function paintBlock(block) {
+  //could a paint white option to be the eraser
   const color = getColor();
   block.style.setProperty("--grid-block-color", color);
 
@@ -62,9 +66,6 @@ function paintBlock(block) {
   block.classList.toggle("active");
 
   //create a current color variable
-
-  // block.style.backgroundColor = "yellow";
-  // block.style.cssText = "background-color:pink;"; why does it not work inline js has higher specificty
 }
 
 function paintGrid() {
@@ -75,4 +76,4 @@ function paintGrid() {
   });
 }
 
-// function isPainted() {}
+createGrid(30);

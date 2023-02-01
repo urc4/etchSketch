@@ -2,38 +2,42 @@ const GRID = document.querySelector(".grid");
 const LENGTH = GRID.offsetWidth;
 
 function eraseGrid() {
-  //there is childNodes[0]
   while (GRID.firstChild) {
     GRID.removeChild(GRID.firstChild);
   }
+}
+function createBlock(gridDivison) {
+  const gridBlock = document.createElement("div");
+  const blockStyle = `height: ${LENGTH / gridDivison}px; width: ${
+    LENGTH / gridDivison
+  }px;`;
+  gridBlock.style.cssText = blockStyle;
+  gridBlock.classList.toggle("grid-block");
+  gridBlock.classList.toggle("inactive");
+  GRID.appendChild(gridBlock);
+}
+
+function createGrid(gridDivision) {
+  eraseGrid();
+  for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
+    createBlock(gridDivision);
+  }
+  getColor();
+  paintGrid();
+}
+
+function clearBlock(block) {
+  if (!isPainted(block)) return;
+  block.classList.toggle("active");
+  block.classList.toggle("inactive");
 }
 
 function clearGrid() {
   let block = document.querySelector(".grid-block");
   while (block) {
-    block.classList.toggle("active");
-    block.classList.toggle("inactive");
+    clearBlock(block);
     block = block.nextSibling;
   }
-}
-
-function createGridBlock(gridDivison) {
-  const gridBlock = document.createElement("div");
-  const gridStyle = `height: ${LENGTH / gridDivison}px; width: ${
-    LENGTH / gridDivison
-  }px;`;
-  gridBlock.style.cssText = gridStyle;
-  gridBlock.classList.toggle("grid-block");
-  gridBlock.classList.toggle("inactive");
-  GRID.appendChild(gridBlock);
-}
-// If you input an invalid command the browser just goes crazy trying to look for it
-function createGrid(gridDivision) {
-  eraseGrid();
-  for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
-    createGridBlock(gridDivision);
-  }
-  paintGrid();
 }
 
 function getColor() {
@@ -47,12 +51,6 @@ function isPainted(gridBlock) {
   const painted = gridBlock.classList.contains("active");
   if (painted) return true;
   return false;
-}
-
-function clearBlock(block) {
-  if (!isPainted(block)) return;
-  block.classList.toggle("active");
-  block.classList.toggle("inactive");
 }
 
 function paintBlock(block) {

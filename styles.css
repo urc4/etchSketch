@@ -50,6 +50,10 @@ button {
     background-color: var(--primary-btn-bg-color);
 }
 
+.selected{
+    border: 0.5px solid #34e009;
+}
+
 .color-btn:hover{
     background-color: var(--secondary-btn-bg-color);
 }
@@ -86,4 +90,17 @@ button {
 .active:hover{
     background-color: var(--secondary-grey-hover);
 }
+
+.eraser {
+    background-color: #f2f2f2;
+}
+
+.eraser:hover {
+    background-color: antiquewhite;
+}
+
+.eraser:active {
+    background-color: bisque;
+}
+
 

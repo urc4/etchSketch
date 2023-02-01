@@ -105,8 +105,24 @@ function paintBlock(block) {
 function paintGrid() {
   const gridBlocks = document.querySelectorAll(".grid-block");
   const colorButton = document.querySelector(".color-btn");
+  const eraserButton = document.querySelector(".eraser");
   colorButton.addEventListener("click", () => {
-    showNextColor();
+    const isSelected = colorButton.classList.contains("selected");
+    if (isSelected) {
+      showNextColor();
+    } else {
+      colorButton.classList.toggle("selected");
+      eraserButton.classList.toggle("selected");
+    }
+  });
+  eraserButton.addEventListener("click", () => {
+    const isSelected = eraserButton.classList.contains("selected");
+    if (isSelected) {
+      console.log("hi");
+    } else {
+      colorButton.classList.toggle("selected");
+      eraserButton.classList.toggle("selected");
+    }
   });
   gridBlocks.forEach((block) => {
     block.addEventListener("mousedown", () => paintBlock(block));
@@ -114,4 +130,4 @@ function paintGrid() {
   });
 }
 
-createGrid(30);
+createGrid(20);

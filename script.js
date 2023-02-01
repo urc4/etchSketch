@@ -1,5 +1,14 @@
 const GRID = document.querySelector(".grid");
 const LENGTH = GRID.offsetWidth;
+const COLOR_PALETTE = [
+  "red",
+  "yellow",
+  "orange",
+  "green",
+  "blue",
+  "indigo",
+  "violet",
+];
 
 function eraseGrid() {
   while (GRID.firstChild) {
@@ -22,7 +31,6 @@ function createGrid(gridDivision) {
   for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
     createBlock(gridDivision);
   }
-  getColor();
   paintGrid();
 }
 
@@ -41,9 +49,24 @@ function clearGrid() {
 }
 
 function getColor() {
-  //has to be a string
+  const colorButton = document.querySelector(".color-btn");
+  return colorButton.id;
+}
 
-  return "green";
+function getNextColor() {
+  const colorButton = document.querySelector(".color-btn");
+  const colorID = colorButton.id;
+  const paletteLength = COLOR_PALETTE.length;
+  const idIndex = COLOR_PALETTE.indexOf(colorID);
+  let nextColor;
+  idIndex === paletteLength
+    ? (nextColor = COLOR_PALETTE[0])
+    : (nextColor = COLOR_PALETTE[idIndex + 1]);
+
+  colorButton.style.setProperty("--btn-color-bground", COLOR_PALETTE[0]);
+  console.log(COLOR_PALETTE[idIndex + 1]);
+  return nextColor;
+
   //add eventlistners to buttons later on
 }
 

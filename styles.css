@@ -4,6 +4,7 @@
     --primary-grey-hover: #808080;
     --secondary-grey-hover: #525252;
     --text-color: #070606;
+    --grid-block-color: #f2f2f2;
 }
 *,
 *::before,
@@ -27,13 +28,21 @@ body {
     flex-shrink: 0;
     height: 960px;
     width: 960px;
+}
+
+.inactive {
     background-color: var(--primary-white);
 }
 
-.grid-block-active:hover{
+.inactive:hover{
     background-color: var(--primary-grey-hover);
 }
 
-.grid-block-painted{
-    background-color: var(--text-color);
+.active {
+    background-color: var(--grid-block-color);
 }
+
+.active:hover{
+    background-color: var(--secondary-grey-hover);
+}
+

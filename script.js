@@ -1,10 +1,19 @@
 const GRID = document.querySelector(".grid");
 const LENGTH = GRID.offsetWidth;
 
-function clearGrid() {
+function eraseGrid() {
   //there is childNodes[0]
   while (GRID.firstChild) {
     GRID.removeChild(GRID.firstChild);
+  }
+}
+
+function clearGrid() {
+  let block = document.querySelector(".grid-block");
+  while (block) {
+    block.classList.toggle("active");
+    block.classList.toggle("inactive");
+    block = block.nextSibling;
   }
 }
 
@@ -20,13 +29,13 @@ function createGridBlock(gridDivison) {
 }
 // If you input an invalid command the browser just goes crazy trying to look for it
 function createGrid(gridDivision) {
-  clearGrid();
+  eraseGrid();
   for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
     createGridBlock(gridDivision);
   }
   paintGrid();
 }
-createGrid(32);
+createGrid(30);
 //if you leave a function with an empty statement it just does not stop runnnig
 // or should it return undefined??
 

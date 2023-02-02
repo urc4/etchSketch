@@ -124,8 +124,7 @@ function selectButton(btnSelected, showNext) {
 function showNextGridDivision() {
   const gridButton = document.querySelector(".grid-division-btn");
   const gridDivision = Number(gridButton.id);
-  let textDiv = gridButton.querySelector(".text-btn");
-  console.log(textDiv);
+  const textDiv = gridButton.querySelector(".text-btn");
   gridButton.removeAttribute("id");
   let nextDivision = gridDivision;
   console.log(gridButton.id);
@@ -135,26 +134,24 @@ function showNextGridDivision() {
   gridButton.setAttribute("id", `${nextDivision}`);
   // textDiv.textContent
   textDiv.textContent = `${nextDivision}`;
+  return document.querySelectorAll(".grid-block");
 }
 
 //can make this fucntion take two argumetns gridBlocks and btnSelected and then new function to go
 //isnide forEach
 function createGridButton() {
-  createGrid(20);
-
   const gridButton = document.querySelector(".grid-division-btn");
   gridButton.addEventListener("click", () => {
-    createGrid(Number(gridButton.id));
     selectButton(gridButton, showNextGridDivision);
-    paintGridButton();
-    eraseGridButton();
+    createGrid(Number(gridButton.id));
   });
+  // return gridBlocks;
 }
 
 function paintGridButton() {
-  const gridBlocks = document.querySelectorAll(".grid-block");
   const colorButton = document.querySelector(".color-btn");
   colorButton.addEventListener("click", () => {
+    const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => paintBlock(block));
       //add mouse down and mouse over and click functionalities to paint individually and drag
@@ -164,9 +161,9 @@ function paintGridButton() {
 }
 
 function eraseGridButton() {
-  const gridBlocks = document.querySelectorAll(".grid-block");
   const eraserButton = document.querySelector(".eraser");
   eraserButton.addEventListener("click", () => {
+    const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => eraseBlock(block)); //just add an if statment here to toggle options
       //add mouse down and mouse over and click functionalities to paint individually and drag
@@ -174,4 +171,12 @@ function eraseGridButton() {
     selectButton(eraserButton, () => {});
   });
 }
+createGrid(32);
+// let gridBlocks = document.querySelectorAll(".grid-block");
+paintGridButton();
+eraseGridButton();
 createGridButton();
+// if ((gridBlocks = createGridButton())) {
+//   paintGridButton();
+//   eraseGridButton();
+// }

@@ -133,27 +133,6 @@ function selectButton(btnSelected, showNext) {
   showNext();
 }
 
-function showNextClickDrag() {
-  const clickDragButton = document.querySelector(".click-drag-btn");
-  const clickDrag = clickDragButton.id;
-  const textDiv = clickDragButton.querySelector(".text-btn");
-  clickDragButton.removeAttribute("id");
-  let nextClickDrag = clickDrag;
-  if (clickDrag === "click") nextClickDrag = "drag";
-  else nextClickDrag = "click";
-
-  clickDragButton.setAttribute("id", `${nextClickDrag}`);
-  textDiv.textContent = `${nextClickDrag}`;
-}
-
-function createClickDragButton() {
-  const clickDragButton = document.querySelector(".click-drag-btn");
-  clickDragButton.addEventListener("click", () => {
-    selectButton(clickDragButton, showNextClickDrag);
-    // createGrid(Number(clickDragButton.id));
-  });
-}
-
 function showNextGridDivision() {
   const gridButton = document.querySelector(".grid-division-btn");
   const gridDivision = Number(gridButton.id);
@@ -170,7 +149,7 @@ function showNextGridDivision() {
 
 function createGridButton() {
   const gridButton = document.querySelector(".grid-division-btn");
-  gridButton.addEventListener("click", () => {
+  gridButton.addEventListener("mousedown", () => {
     const textDiv = gridButton.querySelector(".text-btn");
     textDiv.textContent = gridButton.id;
     selectButton(gridButton, showNextGridDivision);
@@ -188,7 +167,7 @@ function displayClearGridButton() {
 
 function paintGridButton() {
   const colorButton = document.querySelector(".color-btn");
-  colorButton.addEventListener("click", () => {
+  colorButton.addEventListener("mousedown", () => {
     const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => {
@@ -203,7 +182,7 @@ function paintGridButton() {
 
 function paintRandomButton() {
   const rainbowButton = document.querySelector(".rainbow-btn");
-  rainbowButton.addEventListener("click", () => {
+  rainbowButton.addEventListener("mousedown", () => {
     const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => {
@@ -219,7 +198,7 @@ function paintRandomButton() {
 
 function eraseGridButton() {
   const eraserButton = document.querySelector(".eraser");
-  eraserButton.addEventListener("click", () => {
+  eraserButton.addEventListener("mousedown", () => {
     const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => eraseBlock(block));
@@ -233,4 +212,3 @@ paintGridButton();
 eraseGridButton();
 createGridButton();
 paintRandomButton();
-createClickDragButton();

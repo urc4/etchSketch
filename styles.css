@@ -110,14 +110,12 @@ button {
 
 .eraser:hover,
 .grid-division-btn:hover,
-.click-drag-btn:hover,
 .rainbow-btn:hover {
     background-color: antiquewhite;
 }
 
 .eraser:active,
 .grid-division-btn:active,
-.click-drag-btn:active,
 .rainbow-btn:active {
     background-color: bisque;
 }

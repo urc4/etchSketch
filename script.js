@@ -165,16 +165,44 @@ function displayClearGridButton() {
   }
 }
 
+// function paintGridButton() {
+//   const colorButton = document.querySelector(".color-btn");
+//   colorButton.addEventListener("mousedown", () => {
+//     const gridBlocks = document.querySelectorAll(".grid-block");
+//     gridBlocks.forEach((block) => {
+//       block.addEventListener("mousedown", () => {
+//         const color = getColor();
+//         paintBlock(block, color);
+//       });
+//     });
+//     selectButton(colorButton, showNextColor);
+//     displayClearGridButton();
+//   });
+// }
+
 function paintGridButton() {
   const colorButton = document.querySelector(".color-btn");
   colorButton.addEventListener("mousedown", () => {
-    const gridBlocks = document.querySelectorAll(".grid-block");
-    gridBlocks.forEach((block) => {
-      block.addEventListener("mousedown", () => {
-        const color = getColor();
-        paintBlock(block, color);
-      });
+    const gridBlocks = document.querySelector(".grid");
+    let mouseIsDown = false;
+
+    gridBlocks.addEventListener("mousedown", (event) => {
+      mouseIsDown = true;
+      const color = getColor();
+      paintBlock(event.target, color);
     });
+
+    gridBlocks.addEventListener("mouseup", () => {
+      mouseIsDown = false;
+    });
+
+    gridBlocks.addEventListener("mousemove", (event) => {
+      if (mouseIsDown && event.target.matches(".grid-block")) {
+        const color = getColor();
+        paintBlock(event.target, color);
+      }
+    });
+
     selectButton(colorButton, showNextColor);
     displayClearGridButton();
   });

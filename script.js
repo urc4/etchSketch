@@ -134,7 +134,6 @@ function showNextGridDivision() {
   gridButton.setAttribute("id", `${nextDivision}`);
   // textDiv.textContent
   textDiv.textContent = `${nextDivision}`;
-  return document.querySelectorAll(".grid-block");
 }
 
 //can make this fucntion take two argumetns gridBlocks and btnSelected and then new function to go
@@ -142,10 +141,19 @@ function showNextGridDivision() {
 function createGridButton() {
   const gridButton = document.querySelector(".grid-division-btn");
   gridButton.addEventListener("click", () => {
+    const textDiv = gridButton.querySelector(".text-btn");
+    textDiv.textContent = gridButton.id;
     selectButton(gridButton, showNextGridDivision);
     createGrid(Number(gridButton.id));
   });
-  // return gridBlocks;
+}
+
+function displayClearGridButton() {
+  const gridButton = document.querySelector(".grid-division-btn");
+  if (!isSelected(gridButton)) {
+    const textDiv = gridButton.querySelector(".text-btn");
+    textDiv.textContent = `clear`;
+  }
 }
 
 function paintGridButton() {
@@ -157,6 +165,7 @@ function paintGridButton() {
       //add mouse down and mouse over and click functionalities to paint individually and drag
     });
     selectButton(colorButton, showNextColor); //if i put this one line above it just gets so freaknig random
+    displayClearGridButton();
   });
 }
 
@@ -169,6 +178,7 @@ function eraseGridButton() {
       //add mouse down and mouse over and click functionalities to paint individually and drag
     });
     selectButton(eraserButton, () => {});
+    displayClearGridButton();
   });
 }
 createGrid(32);

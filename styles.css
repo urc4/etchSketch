@@ -36,11 +36,22 @@ button {
 }
 
 .btn {
-    border-radius: 50%;
     background-color: #f2f2f2;
 }
 
+.text-btn {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.btn-square {
+    border-radius: 25%;
+    width: 160px;
+    height: 160px;
+}
+
 .btn-circle {
+    border-radius: 50%;
     width: 160px;
     height: 160px;
     /* maybe add transition when clicked */

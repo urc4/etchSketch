@@ -19,42 +19,41 @@ const SECONDARY_COLOR_PALETTE = [
   "lightpink",
 ];
 
-function eraseGrid() {
+function removeGrid() {
   while (GRID.firstChild) {
     GRID.removeChild(GRID.firstChild);
   }
 }
+
+function eraseBlock(block) {
+  if (!isPainted(block)) return;
+  block.classList.remove("active"); //toggle gets confusing with lots of elemetns
+  block.classList.add("inactive");
+}
+
+function eraseGrid() {
+  let block = document.querySelector(".grid-block");
+  while (block) {
+    eraseBlock(block);
+    block = block.nextSibling;
+  }
+}
+
 function createBlock(gridDivison) {
   const gridBlock = document.createElement("div");
   const blockStyle = `height: ${LENGTH / gridDivison}px; width: ${
     LENGTH / gridDivison
   }px;`;
   gridBlock.style.cssText = blockStyle;
-  gridBlock.classList.toggle("grid-block");
-  gridBlock.classList.toggle("inactive");
+  gridBlock.classList.add("grid-block");
+  gridBlock.classList.add("inactive");
   GRID.appendChild(gridBlock);
 }
 
 function createGrid(gridDivision) {
-  eraseGrid();
+  removeGrid();
   for (let counter = 0; counter < gridDivision * gridDivision; counter++) {
     createBlock(gridDivision);
-  }
-  paintGrid(); //here goes the options when selected
-}
-
-function clearBlock(block) {
-  if (!isPainted(block)) return;
-  block.classList.toggle("active");
-  block.classList.toggle("inactive");
-  console.log("hi");
-}
-
-function clearGrid() {
-  let block = document.querySelector(".grid-block");
-  while (block) {
-    clearBlock(block);
-    block = block.nextSibling;
   }
 }
 
@@ -90,79 +89,62 @@ function isPainted(gridBlock) {
 }
 
 function paintBlock(block) {
-  //could a paint white option to be the eraser
   const color = getColor();
-
   block.style.setProperty("--grid-block-color", color);
 
   if (isPainted(block)) return;
 
-  block.classList.toggle("inactive");
-  block.classList.toggle("active");
+  block.classList.remove("inactive");
+  block.classList.add("active");
 
   //create a current color variable
 }
 
-function isAnyButtonSelected() {
+function toggleButtons(btnSelected) {
   const buttons = document.querySelectorAll(".btn-circle");
-  let isAnySelected = false;
   buttons.forEach((button) => {
-    isAnySelected = isAnySelected || button.classList.contains("selected");
+    if (isSelected(button)) button.classList.remove("selected");
   });
-  return isAnySelected;
-}
-
-function toggleButtons(btn) {
-  const buttons = document.querySelectorAll(".btn-circle");
-  if (!isAnyButtonSelected()) {
-    btn.classList.toggle("selected");
-    return;
-  }
-  //could make a change others function too
-  buttons.forEach((button) => {
-    button.classList.toggle("selected");
-  });
+  btnSelected.classList.add("selected");
 }
 
 function isSelected(button) {
   return button.classList.contains("selected");
 }
 
-function selectColorButton(colorButton) {
-  const selected = isSelected(colorButton);
+function selectButton(btnSelected, showNext) {
+  const selected = isSelected(btnSelected);
   if (!selected) {
-    toggleButtons(colorButton);
+    toggleButtons(btnSelected);
     return;
   }
-  showNextColor();
+  showNext();
 }
 
-function selectEraserButton(eraserButton) {
-  const selected = isSelected(eraserButton);
-  if (!selected) {
-    toggleButtons(eraserButton);
-    return;
-  }
-}
-
-function paintGrid() {
+function paintGridButton() {
   const gridBlocks = document.querySelectorAll(".grid-block");
   const colorButton = document.querySelector(".color-btn");
-  const eraserButton = document.querySelector(".eraser");
   colorButton.addEventListener("click", () => {
     gridBlocks.forEach((block) => {
       block.addEventListener("mousedown", () => paintBlock(block));
       //add mouse down and mouse over and click functionalities to paint individually and drag
     });
-    selectColorButton(colorButton);
-  });
-  eraserButton.addEventListener("click", () => {
-    gridBlocks.forEach((block) => {
-      block.addEventListener("mousedown", () => clearBlock(block));
-      //add mouse down and mouse over and click functionalities to paint individually and drag
-    });
-    selectEraserButton(eraserButton);
+    selectButton(colorButton, showNextColor);
   });
 }
 
-createGrid(20);
+function eraseGridButton() {
+  const gridBlocks = document.querySelectorAll(".grid-block");
+  const eraserButton = document.querySelector(".eraser");
+  eraserButton.addEventListener("click", () => {
+    gridBlocks.forEach((block) => {
+      block.addEventListener("mousedown", () => eraseBlock(block)); //just add an if statment here to toggle options
+      //add mouse down and mouse over and click functionalities to paint individually and drag
+    });
+    selectButton(eraserButton, () => {});
+  });
+}
+
+createGrid(32);
+paintGridButton(); //here goes the options when selected
+eraseGridButton();

@@ -134,26 +134,23 @@ function selectButton(btnSelected, showNext) {
 }
 
 function showNextClickDrag() {
-  const gridButton = document.querySelector(".grid-division-btn");
-  const gridDivision = Number(gridButton.id);
-  const textDiv = gridButton.querySelector(".text-btn");
-  gridButton.removeAttribute("id");
-  let nextDivision = gridDivision;
-  console.log(gridButton.id);
-  if (nextDivision + 16 > 100) nextDivision = 16;
-  else nextDivision += 16;
+  const clickDragButton = document.querySelector(".click-drag-btn");
+  const clickDrag = clickDragButton.id;
+  const textDiv = clickDragButton.querySelector(".text-btn");
+  clickDragButton.removeAttribute("id");
+  let nextClickDrag = clickDrag;
+  if (clickDrag === "click") nextClickDrag = "drag";
+  else nextClickDrag = "click";
 
-  gridButton.setAttribute("id", `${nextDivision}`);
-  textDiv.textContent = `${nextDivision}`;
+  clickDragButton.setAttribute("id", `${nextClickDrag}`);
+  textDiv.textContent = `${nextClickDrag}`;
 }
 
-function creteClickDragButton() {
-  const gridButton = document.querySelector(".grid-division-btn");
-  gridButton.addEventListener("click", () => {
-    const textDiv = gridButton.querySelector(".text-btn");
-    textDiv.textContent = gridButton.id;
-    selectButton(gridButton, showNextGridDivision);
-    createGrid(Number(gridButton.id));
+function createClickDragButton() {
+  const clickDragButton = document.querySelector(".click-drag-btn");
+  clickDragButton.addEventListener("click", () => {
+    selectButton(clickDragButton, showNextClickDrag);
+    // createGrid(Number(clickDragButton.id));
   });
 }
 
@@ -236,3 +233,4 @@ paintGridButton();
 eraseGridButton();
 createGridButton();
 paintRandomButton();
+createClickDragButton();

@@ -1,3 +1,5 @@
+/* can improve css using grup selectors */
+
 :root {
     --primary-white: #f2f2f2;
     --primary-dark: #c5c5c5;
@@ -106,19 +108,17 @@ button {
     background-color: #f2f2f2;
 }
 
-.eraser:hover {
+.eraser:hover,
+.grid-division-btn:hover,
+.click-drag-btn:hover,
+.rainbow-btn:hover {
     background-color: antiquewhite;
 }
 
-.eraser:active {
-    background-color: bisque;
-}
-
-.grid-division-btn:hover {
-    background-color: antiquewhite;
-}
-
-.grid-division-btn:active{
+.eraser:active,
+.grid-division-btn:active,
+.click-drag-btn:active,
+.rainbow-btn:active {
     background-color: bisque;
 }
 

@@ -62,6 +62,21 @@ function getColor() {
   return colorButton.id;
 }
 
+function changeRandomColor() {
+  const rainbowButton = document.querySelector(".rainbow-btn");
+  rainbowButton.removeAttribute("id");
+  const randomIndex = Math.floor(
+    Math.random() * (COLOR_PALETTE.length - 0.00000001)
+  );
+  const randomColor = COLOR_PALETTE[randomIndex];
+  rainbowButton.setAttribute("id", `${randomColor}`);
+}
+
+function getRandomColor() {
+  const rainbowButton = document.querySelector(".rainbow-btn");
+  return rainbowButton.id;
+}
+
 function showNextColor() {
   const colorButton = document.querySelector(".color-btn");
   const colorID = colorButton.id;
@@ -88,8 +103,8 @@ function isPainted(gridBlock) {
   return false;
 }
 
-function paintBlock(block) {
-  const color = getColor();
+function paintBlock(block, color) {
+  // const color = getColor();
   block.style.setProperty("--grid-block-color", color);
 
   if (isPainted(block)) return;
@@ -119,6 +134,31 @@ function selectButton(btnSelected, showNext) {
     return;
   }
   showNext();
+}
+
+function showNextClickDrag() {
+  const gridButton = document.querySelector(".grid-division-btn");
+  const gridDivision = Number(gridButton.id);
+  const textDiv = gridButton.querySelector(".text-btn");
+  gridButton.removeAttribute("id");
+  let nextDivision = gridDivision;
+  console.log(gridButton.id);
+  if (nextDivision + 16 > 100) nextDivision = 16;
+  else nextDivision += 16;
+
+  gridButton.setAttribute("id", `${nextDivision}`);
+  // textDiv.textContent
+  textDiv.textContent = `${nextDivision}`;
+}
+
+function creteClickDragButton() {
+  const gridButton = document.querySelector(".grid-division-btn");
+  gridButton.addEventListener("click", () => {
+    const textDiv = gridButton.querySelector(".text-btn");
+    textDiv.textContent = gridButton.id;
+    selectButton(gridButton, showNextGridDivision);
+    createGrid(Number(gridButton.id));
+  });
 }
 
 function showNextGridDivision() {
@@ -161,10 +201,30 @@ function paintGridButton() {
   colorButton.addEventListener("click", () => {
     const gridBlocks = document.querySelectorAll(".grid-block");
     gridBlocks.forEach((block) => {
-      block.addEventListener("mousedown", () => paintBlock(block));
+      block.addEventListener("mousedown", () => {
+        const color = getColor();
+        paintBlock(block, color);
+      });
       //add mouse down and mouse over and click functionalities to paint individually and drag
     });
     selectButton(colorButton, showNextColor); //if i put this one line above it just gets so freaknig random
+    displayClearGridButton();
+  });
+}
+
+function paintRandomButton() {
+  const rainbowButton = document.querySelector(".rainbow-btn");
+  rainbowButton.addEventListener("click", () => {
+    const gridBlocks = document.querySelectorAll(".grid-block");
+    gridBlocks.forEach((block) => {
+      block.addEventListener("mousedown", () => {
+        changeRandomColor();
+        color = getRandomColor();
+        paintBlock(block, color);
+      });
+      //add mouse down and mouse over and click functionalities to paint individually and drag
+    });
+    selectButton(rainbowButton, () => {}); //if i put this one line above it just gets so freaknig random
     displayClearGridButton();
   });
 }
@@ -186,6 +246,7 @@ createGrid(32);
 paintGridButton();
 eraseGridButton();
 createGridButton();
+paintRandomButton();
 // if ((gridBlocks = createGridButton())) {
 //   paintGridButton();
 //   eraseGridButton();

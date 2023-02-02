@@ -114,4 +114,13 @@ button {
     background-color: bisque;
 }
 
+.grid-division-btn:hover {
+    background-color: antiquewhite;
+}
+
+.grid-division-btn:active{
+    background-color: bisque;
+}
+
+
 

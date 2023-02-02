@@ -101,7 +101,7 @@ function paintBlock(block) {
 }
 
 function toggleButtons(btnSelected) {
-  const buttons = document.querySelectorAll(".btn-circle");
+  const buttons = document.querySelectorAll(".btn");
   buttons.forEach((button) => {
     if (isSelected(button)) button.classList.remove("selected");
   });
@@ -121,6 +121,36 @@ function selectButton(btnSelected, showNext) {
   showNext();
 }
 
+function showNextGridDivision() {
+  const gridButton = document.querySelector(".grid-division-btn");
+  const gridDivision = Number(gridButton.id);
+  let textDiv = gridButton.querySelector(".text-btn");
+  console.log(textDiv);
+  gridButton.removeAttribute("id");
+  let nextDivision = gridDivision;
+  console.log(gridButton.id);
+  if (nextDivision + 16 > 100) nextDivision = 16;
+  else nextDivision += 16;
+
+  gridButton.setAttribute("id", `${nextDivision}`);
+  // textDiv.textContent
+  textDiv.textContent = `${nextDivision}`;
+}
+
+//can make this fucntion take two argumetns gridBlocks and btnSelected and then new function to go
+//isnide forEach
+function createGridButton() {
+  createGrid(20);
+
+  const gridButton = document.querySelector(".grid-division-btn");
+  gridButton.addEventListener("click", () => {
+    createGrid(Number(gridButton.id));
+    selectButton(gridButton, showNextGridDivision);
+    paintGridButton();
+    eraseGridButton();
+  });
+}
+
 function paintGridButton() {
   const gridBlocks = document.querySelectorAll(".grid-block");
   const colorButton = document.querySelector(".color-btn");
@@ -129,7 +159,7 @@ function paintGridButton() {
       block.addEventListener("mousedown", () => paintBlock(block));
       //add mouse down and mouse over and click functionalities to paint individually and drag
     });
-    selectButton(colorButton, showNextColor);
+    selectButton(colorButton, showNextColor); //if i put this one line above it just gets so freaknig random
   });
 }
 
@@ -144,7 +174,4 @@ function eraseGridButton() {
     selectButton(eraserButton, () => {});
   });
 }
-
-createGrid(32);
-paintGridButton(); //here goes the options when selected
-eraseGridButton();
+createGridButton();

@@ -184,6 +184,7 @@ function paintGridButton() {
   const colorButton = document.querySelector(".color-btn");
   colorButton.addEventListener("mousedown", () => {
     const gridBlocks = document.querySelector(".grid");
+    removeEventListeners();
     let mouseIsDown = false;
 
     gridBlocks.addEventListener("mousedown", (event) => {
@@ -208,35 +209,105 @@ function paintGridButton() {
   });
 }
 
+function removeEventListeners() {
+  let gridBlocks = document.querySelector(".grid");
+  let listeners = gridBlocks._listeners;
+
+  for (let type in listeners) {
+    listeners[type].forEach((listener) => {
+      gridBlocks.removeEventListener(type, listener);
+    });
+  }
+}
+// function paintRandomButton() {
+//   const rainbowButton = document.querySelector(".rainbow-btn");
+//   rainbowButton.addEventListener("mousedown", () => {
+//     const gridBlocks = document.querySelectorAll(".grid-block");
+//     gridBlocks.forEach((block) => {
+//       block.addEventListener("mousedown", () => {
+//         //this just overrides the previously selected
+//         changeRandomColor();
+//         color = getRandomColor();
+//         paintBlock(block, color);
+//       });
+//     });
+//     selectButton(rainbowButton, () => {});
+//     displayClearGridButton();
+//   });
+// }
+
 function paintRandomButton() {
   const rainbowButton = document.querySelector(".rainbow-btn");
   rainbowButton.addEventListener("mousedown", () => {
-    const gridBlocks = document.querySelectorAll(".grid-block");
-    gridBlocks.forEach((block) => {
-      block.addEventListener("mousedown", () => {
-        changeRandomColor();
-        color = getRandomColor();
-        paintBlock(block, color);
-      });
+    const gridBlocks = document.querySelector(".grid");
+    removeEventListeners();
+    let mouseIsDown = false;
+
+    gridBlocks.addEventListener("mousedown", (event) => {
+      mouseIsDown = true;
+      changeRandomColor();
+      const color = getRandomColor();
+      paintBlock(event.target, color);
     });
+
+    gridBlocks.addEventListener("mouseup", () => {
+      mouseIsDown = false;
+    });
+
+    gridBlocks.addEventListener("mousemove", (event) => {
+      if (mouseIsDown && event.target.matches(".grid-block")) {
+        changeRandomColor();
+        const color = getRandomColor();
+        paintBlock(event.target, color);
+      }
+    });
+
     selectButton(rainbowButton, () => {});
     displayClearGridButton();
   });
 }
 
+// function eraseGridButton() {
+//   const eraserButton = document.querySelector(".eraser");
+//   eraserButton.addEventListener("mousedown", () => {
+//     const gridBlocks = document.querySelectorAll(".grid-block");
+//     gridBlocks.forEach((block) => {
+//       block.addEventListener("mousedown", () => eraseBlock(block));
+//     });
+//     selectButton(eraserButton, () => {});
+//     displayClearGridButton();
+//   });
+// }
+
 function eraseGridButton() {
   const eraserButton = document.querySelector(".eraser");
   eraserButton.addEventListener("mousedown", () => {
-    const gridBlocks = document.querySelectorAll(".grid-block");
-    gridBlocks.forEach((block) => {
-      block.addEventListener("mousedown", () => eraseBlock(block));
+    const gridBlocks = document.querySelector(".grid");
+    removeEventListeners();
+    let mouseIsDown = false;
+
+    gridBlocks.addEventListener("mousedown", (event) => {
+      mouseIsDown = true;
+      eraseBlock(event.target);
     });
+
+    gridBlocks.addEventListener("mouseup", () => {
+      mouseIsDown = false;
+    });
+
+    gridBlocks.addEventListener("mousemove", (event) => {
+      if (mouseIsDown && event.target.matches(".grid-block")) {
+        eraseBlock(event.target);
+      }
+    });
+
     selectButton(eraserButton, () => {});
     displayClearGridButton();
   });
 }
+
 createGrid(32);
-paintGridButton();
 eraseGridButton();
 createGridButton();
 paintRandomButton();
+paintGridButton();

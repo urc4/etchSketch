@@ -30,15 +30,33 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url("./imgs/background-etchsketch.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 main {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sketch-container {
+  display: flex;
+}
+
+header {
+  font-size: 64px;
+  margin-bottom: 32px;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .buttons-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  padding-right: 32px;
 }
 
 button {
@@ -71,6 +89,7 @@ button {
   width: 96px;
   height: 96px;
   /* maybe add transition when clicked */
+  box-shadow: 0px 0px 10px 3px beige;
 }
 
 .color-btn {
@@ -95,11 +114,13 @@ button {
 } */
 
 .grid {
+  background-color: var(--primary-white);
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
   height: 512px;
   width: 512px;
+  box-shadow: 0px 0px 10px 10px beige;
 }
 
 .inactive {

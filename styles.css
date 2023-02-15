@@ -1,124 +1,121 @@
 /* can improve css using grup selectors */
 
 :root {
-    --primary-white: #f2f2f2;
-    --primary-dark: #c5c5c5;
-    --primary-grey-hover: #808080;
-    --secondary-grey-hover: #525252;
-    --text-color: #070606;
-    --grid-block-color: #f2f2f2;
-    --primary-btn-bg-color: red;
-    --secondary-btn-bg-color: lightcoral;
+  --primary-white: #f2f2f2;
+  --primary-dark: #c5c5c5;
+  --primary-grey-hover: #808080;
+  --secondary-grey-hover: #525252;
+  --text-color: #070606;
+  --grid-block-color: #f2f2f2;
+  --primary-btn-bg-color: red;
+  --secondary-btn-bg-color: lightcoral;
 }
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 body {
-    background-color: var(--primary-dark);
-    color: var(--text-color);
-    font-family: 'Roboto', sans-serif;
+  background-color: var(--primary-dark);
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
 }
 
 button {
-    border: none;
-    /* inherit: estilo herdado do elemento pai, there is also initial */
-    color: inherit; 
-    font-family: inherit;
-    font-size: inherit;
-    cursor: pointer;
-    outline: none;
+  border: none;
+  /* inherit: estilo herdado do elemento pai, there is also initial */
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  outline: none;
 }
 
 .btn {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .text-btn {
-    font-weight: 800;
-    font-size: 20px;
+  font-weight: 800;
+  font-size: 20px;
 }
 
 .btn-square {
-    border-radius: 25%;
-    width: 160px;
-    height: 160px;
+  border-radius: 25%;
+  width: 160px;
+  height: 160px;
 }
 
 .btn-circle {
-    border-radius: 50%;
-    width: 160px;
-    height: 160px;
-    /* maybe add transition when clicked */
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  /* maybe add transition when clicked */
 }
 
 .color-btn {
-    background-color: var(--primary-btn-bg-color);
+  background-color: var(--primary-btn-bg-color);
 }
 
-.selected{
-    border: 0.5px solid #34e009;
+.selected {
+  border: 0.5px solid #34e009;
 }
 
-.color-btn:hover{
-    background-color: var(--secondary-btn-bg-color);
+.color-btn:hover {
+  background-color: var(--secondary-btn-bg-color);
 }
 
-.btn:active{
-    background-color: var(--text-color);
+.btn:active {
+  background-color: var(--text-color);
 }
 
-.sign{
-    font-size: 36px;
-    padding: 10px;
+.sign {
+  font-size: 36px;
+  padding: 10px;
 }
 
-.grid{
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-    height: 960px;
-    width: 960px;
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  height: 960px;
+  width: 960px;
 }
 
 .inactive {
-    background-color: var(--primary-white);
+  background-color: var(--primary-white);
 }
 
-.inactive:hover{
-    background-color: var(--primary-grey-hover);
+.inactive:hover {
+  background-color: var(--primary-grey-hover);
 }
 
 .active {
-    background-color: var(--grid-block-color);
+  background-color: var(--grid-block-color);
 }
 
-.active:hover{
-    background-color: var(--secondary-grey-hover);
+.active:hover {
+  background-color: var(--secondary-grey-hover);
 }
 
 .eraser {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .eraser:hover,
 .grid-division-btn:hover,
 .rainbow-btn:hover {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
 }
 
 .eraser:active,
 .grid-division-btn:active,
 .rainbow-btn:active {
-    background-color: bisque;
+  background-color: bisque;
 }
-
-
-

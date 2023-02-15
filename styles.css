@@ -24,7 +24,8 @@ html {
 body {
   background-color: var(--primary-dark);
   color: var(--text-color);
-  font-family: "Roboto", sans-serif;
+  font-family: "Leckerli One", cursive, sans-serif;
+  height: 100vh;
 }
 
 button {

@@ -1,3 +1,7 @@
+const FOOTER = document.querySelector("footer");
+const yearDisplay = FOOTER.querySelector("#year");
+yearDisplay.textContent = new Date().getFullYear();
+
 const GRID = document.querySelector(".grid");
 const LENGTH = GRID.offsetWidth;
 const COLOR_PALETTE = [
@@ -69,12 +73,12 @@ function changeRandomColor() {
     Math.random() * (COLOR_PALETTE.length - 0.00000001)
   );
   const randomColor = COLOR_PALETTE[randomIndex];
-  rainbowButton.setAttribute("id", `${randomColor}`);
+  rainbowButton.setAttribute("id", `${randomColor}`.toUpperCase());
 }
 
 function getRandomColor() {
   const rainbowButton = document.querySelector(".rainbow-btn");
-  return rainbowButton.id;
+  return rainbowButton.id.toLowerCase();
 }
 
 function showNextColor() {
@@ -140,7 +144,7 @@ function showNextGridDivision() {
   gridButton.removeAttribute("id");
   let nextDivision = gridDivision;
   console.log(gridButton.id);
-  if (nextDivision + 16 > 100) nextDivision = 16;
+  if (nextDivision + 16 > 70) nextDivision = 16;
   else nextDivision += 16;
 
   gridButton.setAttribute("id", `${nextDivision}`);
@@ -161,24 +165,9 @@ function displayClearGridButton() {
   const gridButton = document.querySelector(".grid-division-btn");
   if (!isSelected(gridButton)) {
     const textDiv = gridButton.querySelector(".text-btn");
-    textDiv.textContent = `clear`;
+    textDiv.textContent = `Clear`;
   }
 }
-
-// function paintGridButton() {
-//   const colorButton = document.querySelector(".color-btn");
-//   colorButton.addEventListener("mousedown", () => {
-//     const gridBlocks = document.querySelectorAll(".grid-block");
-//     gridBlocks.forEach((block) => {
-//       block.addEventListener("mousedown", () => {
-//         const color = getColor();
-//         paintBlock(block, color);
-//       });
-//     });
-//     selectButton(colorButton, showNextColor);
-//     displayClearGridButton();
-//   });
-// }
 
 function paintGridButton() {
   const colorButton = document.querySelector(".color-btn");
@@ -219,22 +208,6 @@ function removeEventListeners() {
     });
   }
 }
-// function paintRandomButton() {
-//   const rainbowButton = document.querySelector(".rainbow-btn");
-//   rainbowButton.addEventListener("mousedown", () => {
-//     const gridBlocks = document.querySelectorAll(".grid-block");
-//     gridBlocks.forEach((block) => {
-//       block.addEventListener("mousedown", () => {
-//         //this just overrides the previously selected
-//         changeRandomColor();
-//         color = getRandomColor();
-//         paintBlock(block, color);
-//       });
-//     });
-//     selectButton(rainbowButton, () => {});
-//     displayClearGridButton();
-//   });
-// }
 
 function paintRandomButton() {
   const rainbowButton = document.querySelector(".rainbow-btn");
@@ -266,18 +239,6 @@ function paintRandomButton() {
     displayClearGridButton();
   });
 }
-
-// function eraseGridButton() {
-//   const eraserButton = document.querySelector(".eraser");
-//   eraserButton.addEventListener("mousedown", () => {
-//     const gridBlocks = document.querySelectorAll(".grid-block");
-//     gridBlocks.forEach((block) => {
-//       block.addEventListener("mousedown", () => eraseBlock(block));
-//     });
-//     selectButton(eraserButton, () => {});
-//     displayClearGridButton();
-//   });
-// }
 
 function eraseGridButton() {
   const eraserButton = document.querySelector(".eraser");
